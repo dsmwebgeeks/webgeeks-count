@@ -21,6 +21,14 @@ And receive a JSON response:
 
 ## Development
 
+Create a `now-secrets.json` file with an Eventbrite API auth token from the DSM Web Geeks account:
+
+```json
+{
+  "@eventbrite-oauth-token": "AUTHTOKEN"
+}
+```
+
 With Node >= v10:
 
 ```bash
