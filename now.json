@@ -1,0 +1,11 @@
+{
+  "public": true,
+  "type": "docker",
+  "alias": "webgeeks-count",
+  "features": {
+    "cloud": "v2"
+  },
+  "env": {
+    "EVENTBRITE_OAUTH_TOKEN": "@eventbrite-oauth-token"
+  }
+}
