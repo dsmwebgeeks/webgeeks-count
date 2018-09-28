@@ -1,10 +1,11 @@
 require('now-env')
 const fetch = require('node-fetch');
 const { send } = require('micro');
+const rateLimit = require('micro-ratelimit')
 
 const API_ENDPOINT = 'https://www.eventbriteapi.com/v3';
 
-module.exports = async (req, res) => {
+module.exports = rateLimit(async (req, res) => {
   if (/favicon\.ico/.test(req.url)) {
     return;
   }
@@ -16,7 +17,7 @@ module.exports = async (req, res) => {
   };
 
   return await getEventAttendance(eventId);
-}
+});
 
 async function getEventAttendance(eventId) {
   try {
