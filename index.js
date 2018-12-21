@@ -1,23 +1,28 @@
 require('now-env')
 const fetch = require('node-fetch');
-const { send } = require('micro');
-const rateLimit = require('micro-ratelimit')
+const { URLSearchParams } = require('url');
 
 const API_ENDPOINT = 'https://www.eventbriteapi.com/v3';
 
-module.exports = rateLimit(async (req, res) => {
+module.exports = async (req, res) => {
   if (/favicon\.ico/.test(req.url)) {
     return;
   }
 
   const eventId = getEventIdFromUrl(req.url);
+  res.setHeader('content-type', 'application/json');
 
   if (!eventId) {
-    return send(res, 500, { error: 'A valid eventUrl is required.' })
+    res.status = 500;
+    res.end(JSON.stringify({ error: 'A valid eventUrl is required.' }));
+    return;
   };
 
-  return await getEventAttendance(eventId);
-});
+  const attendance = await getEventAttendance(eventId);
+
+  res.end(JSON.stringify(attendance));
+  return;
+};
 
 async function getEventAttendance(eventId) {
   try {

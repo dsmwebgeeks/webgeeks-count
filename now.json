@@ -1,10 +1,9 @@
 {
-  "public": true,
-  "type": "docker",
+  "version": 2,
   "alias": "webgeeks-count",
-  "features": {
-    "cloud": "v2"
-  },
+  "builds": [
+    { "src": "*.js", "use": "@now/node" }
+  ],
   "env": {
     "EVENTBRITE_OAUTH_TOKEN": "@eventbrite-oauth-token"
   }
